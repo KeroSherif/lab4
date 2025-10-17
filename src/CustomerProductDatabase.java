@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -8,19 +7,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-=======
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
->>>>>>> Stashed changes
 
 /**
  *
  * @author marina sherif
  */
 public class CustomerProductDatabase {
-<<<<<<< Updated upstream
     private ArrayList<CustomerProduct> records;  // هنا نخزن كل العمليات
     private String filename;                     // اسم الملف
 
@@ -110,7 +102,4 @@ public class CustomerProductDatabase {
             System.out.println("Error writing file: " + e.getMessage());
         }
     }
-=======
-    
->>>>>>> Stashed changes
 }
