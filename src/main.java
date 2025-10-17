@@ -9,11 +9,25 @@
  */
 public class main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        System.out.println("SADF");
+        // CustomerProduct newPurchase =CustomerProduct.getCustomerProductFromUser();
+        
+        // System.out.println("Purchase saved: " + newPurchase.lineRepresentation());
+        CustomerProductDatabase db = new CustomerProductDatabase("CustomersProducts.txt");
+
+        db.readFromFile();
+
+        CustomerProduct newPurchase = CustomerProduct.getCustomerProductFromUser();
+
+        db.insertRecord(newPurchase);
+
+        db.saveToFile();
+
+        System.out.println("\nAll records in file:");
+        for (CustomerProduct cp : db.returnAllRecords()) {
+            System.out.println(cp.lineRepresentation());
+        }
+
+        System.out.println("✅ All purchases displayed successfully!");
     }
-    
 }
