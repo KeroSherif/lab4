@@ -12,86 +12,43 @@ import java.io.IOException;
  *
  * @author DANAH
  */
-public class EmployeeUserDatabase{
-    private String fileName;
-    private ArrayList<EmployeeUser> records;
-    
-    public EmployeeUserDatabase(String filename){
-        this.fileName = fileName;
-        this.records = new ArrayList<>();
+import java.util.ArrayList;
+
+public class EmployeeUserDatabase extends DataBase {
+    public EmployeeUserDatabase(String filename) {
+        super(filename);
     }
-    
-    public void readFromFile() {
-        records.clear();
-        try(BufferedReader br =new BufferedReader(new FileReader(fileName))){
-            String line;
-             while ((line = br.readLine()) != null) {
-                EmployeeUser emp = createRecordFrom(line);
-                records.add(emp);
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading from file: " + e.getMessage());
+
+    @Override
+    public EmployeeUser createRecordFrom(String line) {
+        String[] p = line.split(",");
+        if (p.length == 5) {
+            return new EmployeeUser(p[0], p[1], p[2], p[3], p[4]);
         }
+        return null;
     }
-    
-    public EmployeeUser createRecordFrom(String line){
-        String[] parts = line.split(",");
-        if (parts.length == 5) {
-            return new EmployeeUser(parts[0], parts[1], parts[2], parts[3], parts[4]);
-        } else {
-            return null;
-        }
-    }
-    
-    public ArrayList<EmployeeUser> returnAllRecords(){
-       return records; 
-    }
-    
-    public boolean contains(String key ){
-     for (EmployeeUser emp : records) {
-            if (emp.getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-   
-    public EmployeeUser getRecord(String key){
-        for (EmployeeUser emp : records) {
-            if (emp.getSearchKey().equals(key)) {
-                return emp;
+
+    public EmployeeUser getRecord(String key) {
+        for (Record r : records) {
+            if (r.getSearchKey().equals(key)) {
+                return (EmployeeUser) r;
             }
         }
         return null;
     }
-    
-   public void insertRecord(EmployeeUser record){
-       records.add(record);
-   }
-   
-   public void deleteRecord(String key){
-      EmployeeUser toRemove = null;
-        for (EmployeeUser emp : records) {
-            if (emp.getSearchKey().equals(key)) {
-                toRemove = emp;
-                break;
-            }
+
+    public ArrayList<EmployeeUser> returnAllRecords() {
+        ArrayList<EmployeeUser> list = new ArrayList<>();
+        for (Record r : records) {
+            list.add((EmployeeUser) r);
         }
-        if (toRemove != null) {
-            records.remove(toRemove);
-        }
-    } 
-   
-   public void saveToFile(){
-      try (PrintWriter pw = new PrintWriter(new FileWriter(fileName, false))) {
-            for (EmployeeUser emp : records) {
-                pw.println(emp.lineRepresentation());
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving to file: " + e.getMessage());
-        }
+        return list;
     }
-} 
+
+    public void insertRecord(EmployeeUser e) {
+        records.add(e);
+    }
+}
     
     
      
