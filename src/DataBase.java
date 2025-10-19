@@ -6,7 +6,7 @@
 
 /**
  *
- * @author marina sherif
+ * @author Kirolos sherif
  */
 import java.io.*;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public abstract class DataBase {
                 }
             }
         } catch (IOException e) {
-            // ملف غير موجود — نبدأ فارغًا
+           
         }
     }
 
