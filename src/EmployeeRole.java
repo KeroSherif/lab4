@@ -22,6 +22,8 @@ public class EmployeeRole {
         System.err.println(" Quantity cannot be negative.");
         return;
     }
+
+
     
     if (productDatabase.contains(productID)) {
         System.err.println(" Product with ID " + productID + " already exists.");
@@ -29,7 +31,7 @@ public class EmployeeRole {
     }
     Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity, 0.0f);
     productDatabase.insertRecord(newProduct);
-}
+    }
 
     public Product[] getListOfProducts() {
         return productDatabase.returnAllRecords().toArray(new Product[0]);
