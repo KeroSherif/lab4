@@ -49,19 +49,3 @@ public class productDatabase extends DataBase {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
