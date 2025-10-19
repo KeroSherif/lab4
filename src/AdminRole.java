@@ -1,10 +1,8 @@
 public class AdminRole {
-
     private EmployeeUserDatabase database;
 
     public AdminRole() {
         this.database = new EmployeeUserDatabase("Employees.txt");
-        this.database.readFromFile(); // تحميل البيانات من الملف عند البدء
     }
 
     public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
@@ -12,7 +10,6 @@ public class AdminRole {
         database.insertRecord(newUser);
     }
 
- 
     public EmployeeUser[] getListOfEmployees() {
         return database.returnAllRecords().toArray(new EmployeeUser[0]);
     }
