@@ -18,7 +18,7 @@ public class AdminRole {
     EmployeeUser newUser = new EmployeeUser(employeeId, name, email, address, phoneNumber);
     database.insertRecord(newUser);
     }
-
+    
     public EmployeeUser[] getListOfEmployees() {
         return database.returnAllRecords().toArray(new EmployeeUser[0]);
     }
