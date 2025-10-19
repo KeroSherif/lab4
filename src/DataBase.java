@@ -11,8 +11,8 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public abstract class DataBase<T extends Record> {
-    protected ArrayList<T> records;
+public abstract class DataBase {
+    protected ArrayList<Record> records;
     protected String filename;
 
     public DataBase(String filename) {
@@ -21,7 +21,7 @@ public abstract class DataBase<T extends Record> {
         readFromFile();
     }
 
-    public abstract T createRecordFrom(String line);
+    public abstract Record createRecordFrom(String line);
 
     public void readFromFile() {
         records.clear();
@@ -29,39 +29,26 @@ public abstract class DataBase<T extends Record> {
             String line;
             while ((line = br.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
-                    T rec = createRecordFrom(line);
+                    Record rec = createRecordFrom(line);
                     if (rec != null) records.add(rec);
                 }
             }
         } catch (IOException e) {
-            System.err.println("File not found or error reading: " + filename);
+            // ملف غير موجود — نبدأ فارغًا
         }
     }
 
     public void saveToFile() {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
-            for (T record : records) {
-                pw.println(record.lineRepresentation());
+            for (Record r : records) {
+                pw.println(r.lineRepresentation());
             }
         } catch (IOException e) {
             System.err.println("Error writing to file: " + filename);
         }
     }
 
-    public boolean contains(String key) {
-        return getRecord(key) != null;
-    }
-
-    public T getRecord(String key) {
-        for (T record : records) {
-            if (record.getSearchKey().equals(key)) {
-                return record;
-            }
-        }
-        return null;
-    }
-
-    public void insertRecord(T record) {
+    public void insertRecord(Record record) {
         records.add(record);
     }
 
@@ -69,7 +56,10 @@ public abstract class DataBase<T extends Record> {
         records.removeIf(r -> r.getSearchKey().equals(key));
     }
 
-    public ArrayList<T> returnAllRecords() {
-        return records;
+    public boolean contains(String key) {
+        for (Record r : records) {
+            if (r.getSearchKey().equals(key)) return true;
+        }
+        return false;
     }
 }
