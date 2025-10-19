@@ -37,20 +37,6 @@ public class EmployeeUserDatabase extends DataBase {
     }
 
     
-    public void readFromFile() {
-        records.clear();
-        try(BufferedReader br =new BufferedReader(new FileReader(fileName))){
-            String line;
-             while ((line = br.readLine()) != null) {
-                EmployeeUser emp = createRecordFrom(line);
-                records.add(emp);
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading from file: " + e.getMessage());
-        }
-    }
-    
-    
     public ArrayList<EmployeeUser> returnAllRecords() {
         ArrayList<EmployeeUser> list = new ArrayList<>();
         for (Record r : records) {
