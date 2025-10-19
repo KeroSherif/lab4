@@ -84,6 +84,19 @@ public class EmployeeRole {
         return product.getPrice();
     }
 
+    public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
+        for (CustomerProduct cp : customerProductDatabase.returnAllRecords()) {
+            if (cp.getCustomerSSN().equals(customerSSN) && cp.getPurchaseDate().equals(purchaseDate)) {
+                if (!cp.isPaid()) {
+                    cp.setPaid(true);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 
     public void logout() {
         productDatabase.saveToFile();
