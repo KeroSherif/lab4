@@ -5,6 +5,7 @@ public class AdminRole {
         this.database = new EmployeeUserDatabase("Employees.txt");
     }
 
+    
     public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
     if (employeeId == null || employeeId.trim().isEmpty()) {
         System.err.println(" Employee ID cannot be empty.");
