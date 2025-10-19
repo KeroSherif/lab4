@@ -60,7 +60,27 @@ public class EmployeeRole{
         return false;
     }
 
+  
+    public double returnProduct(String customerSSN, String productID, LocalDate purchaseDate, LocalDate returnDate) {
+
+        long daysSincePurchase = ChronoUnit.DAYS.between(purchaseDate, returnDate);
+
+        if (returnDate.isBefore(purchaseDate) || daysSincePurchase > 14) {
+            return -1; // Return is not within the allowed time.
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String purchaseRecordKey = customerSSN + "," + productID + "," + purchaseDate.format(formatter);
+
+        if (!customerProductDatabase.contains(purchaseRecordKey)) {
+            return -1; 
+        }
     
+        Product product = productsDatabase.getRecord(productID);
+
+        product.setQuantity(product.getQuantity() + 1);
+    
+        return product.getPrice();
+    }
 
     public boolean applyPayment(String customerSSN, LocalDatepurchaseDate){
         ArrayList<CustomerProduct> allPurchases = customerProductDatabase.returnAllRecords();
