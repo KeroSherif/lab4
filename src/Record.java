@@ -6,7 +6,7 @@
 
 /**
  *
- * @author marina sherif
+ * @author Kirolos sherif
  */
 public abstract class Record {
     public abstract String lineRepresentation();
