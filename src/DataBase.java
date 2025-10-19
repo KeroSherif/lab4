@@ -23,7 +23,26 @@ public abstract class DataBase {
 
     public abstract Record createRecordFrom(String line);
 
-    
+    public void readFromFile() {
+        records.clear();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+              while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    Record rec = createRecordFrom(line);
+                    if (rec != null) {
+                        records.add(rec);
+                    }
+                }
+            }
+        } catch (IOException e){
+           
+        }
     }
+    
+    
+    
+    
+            }
 
    
