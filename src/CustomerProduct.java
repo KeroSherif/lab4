@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author marina sherif
+ * @author Kirolos sherif
  */
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
