@@ -8,6 +8,7 @@
  * @author monic
  */
 public class Product {
+
     private String productID;
     private String productName;
     private String manufacturerName;
@@ -30,6 +31,10 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public float getPrice() {
+        return price;
     }
 
     public String lineRepresentation() {
