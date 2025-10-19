@@ -13,7 +13,6 @@ public class EmployeeUser extends Record {
         this.phoneNumber = phoneNumber;
     }
 
-    // ✅ getters مطلوبة للوصول من خارج الكلاس
     public String getEmployeeId() { return employeeId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
