@@ -12,94 +12,47 @@ import java.util.ArrayList;
  *
  * @author marina sherif
  */
-public class CustomerProductDatabase {
-    private ArrayList<CustomerProduct> records;  // هنا نخزن كل العمليات
-    private String filename;                     // اسم الملف
 
-    // Constructor
+
+public class CustomerProductDatabase extends DataBase {
     public CustomerProductDatabase(String filename) {
-        this.filename = filename;
-        this.records = new ArrayList<>();
+        super(filename);
     }
 
-    // 1️⃣ readFromFile() - قراءة كل البيانات من الملف
-    public void readFromFile() {
-        records.clear();
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                records.add(createRecordFrom(line));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found. A new one will be created when saving.");
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        }
-    }
-
-    // 2️⃣ createRecordFrom() - تحويل سطر واحد إلى object
+    @Override
     public CustomerProduct createRecordFrom(String line) {
-        try {
-            String[] parts = line.split(",");
-            String ssn = parts[0];
-            String productId = parts[1];
-            LocalDate date = LocalDate.parse(parts[2], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            boolean paid = Boolean.parseBoolean(parts[3]);
-
-            CustomerProduct record = new CustomerProduct(ssn, productId, date);
-            record.setPaid(paid);
-            return record;
-        } catch (Exception e) {
-            System.out.println("Error parsing line: " + line);
-            return null;
-        }
-    }
-
-    // 3️⃣ returnAllRecords() - ترجّع كل العمليات
-    public ArrayList<CustomerProduct> returnAllRecords() {
-        return records;
-    }
-
-    // 4️⃣ contains() - تتحقق هل العملية دي موجودة ولا لأ
-    public boolean contains(String key) {
-        for (CustomerProduct record : records) {
-            if (record.getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // 5️⃣ getRecord() - ترجّع عملية معينة
-    public CustomerProduct getRecord(String key) {
-        for (CustomerProduct record : records) {
-            if (record.getSearchKey().equals(key)) {
-                return record;
+        String[] p = line.split(",");
+        if (p.length == 4) {
+            try {
+                LocalDate date = LocalDate.parse(p[2], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                CustomerProduct cp = new CustomerProduct(p[0], p[1], date);
+                cp.setPaid(Boolean.parseBoolean(p[3]));
+                return cp;
+            } catch (Exception e) {
+                return null;
             }
         }
         return null;
     }
 
-    // 6️⃣ insertRecord() - تضيف عملية جديدة
-    public void insertRecord(CustomerProduct record) {
-        records.add(record);
-    }
-
-    // 7️⃣ deleteRecord() - تمسح عملية معينة
-    public void deleteRecord(String key) {
-        records.removeIf(record -> record.getSearchKey().equals(key));
-    }
-
-    // 8️⃣ saveToFile() - تكتب البيانات كلها تاني في الفايل
-    public void saveToFile() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-            for (CustomerProduct record : records) {
-                bw.write(record.lineRepresentation());
-                bw.newLine();
+    public CustomerProduct getRecord(String key) {
+        for (Record r : records) {
+            if (r.getSearchKey().equals(key)) {
+                return (CustomerProduct) r;
             }
-            System.out.println("✅ Data saved successfully to " + filename);
-        } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
         }
+        return null;
+    }
+
+    public ArrayList<CustomerProduct> returnAllRecords() {
+        ArrayList<CustomerProduct> list = new ArrayList<>();
+        for (Record r : records) {
+            list.add((CustomerProduct) r);
+        }
+        return list;
+    }
+
+    public void insertRecord(CustomerProduct cp) {
+        records.add(cp);
     }
 }
