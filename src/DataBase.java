@@ -36,8 +36,22 @@ public abstract class DataBase {
                 }
             }
         } catch (IOException e){
-           
+          System.err.println("Error writing to file: " + filename); 
         }
+    }
+    
+    public void saveToFile() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+            for (Record r : records) {
+                pw.println(r.lineRepresentation());
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + filename);
+        }
+    }
+    
+    public void insertRecord(Record record) {
+        records.add(record);
     }
     
     
