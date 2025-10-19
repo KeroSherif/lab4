@@ -5,6 +5,9 @@ public class EmployeeUser extends Record {
     private String address;
     private String phoneNumber;
 
+
+
+    
     public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber) {
         this.employeeId = employeeId;
         this.name = name;
@@ -13,12 +16,16 @@ public class EmployeeUser extends Record {
         this.phoneNumber = phoneNumber;
     }
 
+
+    
     public String getEmployeeId() { return employeeId; }
     public String getName() { return name; }
     public String getEmail() { return email; }
     public String getAddress() { return address; }
     public String getPhoneNumber() { return phoneNumber; }
 
+
+    
 
     @Override
     public String lineRepresentation() {
@@ -30,3 +37,5 @@ public class EmployeeUser extends Record {
         return employeeId;
     }
 }
+
+
