@@ -62,21 +62,20 @@ public class EmployeeRole{
 
   
     public double returnProduct(String customerSSN, String productID, LocalDate purchaseDate, LocalDate returnDate) {
-        long daysSincePurchase = ChronoUnit.DAYS.between(purchaseDate, returnDate);
-        if (returnDate.isBefore(purchaseDate) || daysSincePurchase > 14) {
-            return -1;
-        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String purchaseRecordKey = customerSSN + "," + productID + "," + purchaseDate.format(formatter);
-        if (!customerProductDatabase.contains(purchaseRecordKey)) {
-            return -1; 
-        }
-        Product product = productsDatabase.getRecord(productID);
-        product.setQuantity(product.getQuantity() + 1);
-        customerProductDatabase.deleteRecord(purchaseRecordKey);
+        String searchKey = customerSSN + "," + productID + "," + purchaseDate.format(formatter);
+        long daysBetween = ChronoUnit.DAYS.between(purchaseDate, returnDate);
+        if (returnDate.isBefore(purchaseDate) || daysBetween > 14) {
+            return -1;
+            }
+            Product product = productsDatabase.getRecord(productID);
+            if (product == null || !customerProductDatabase.contains(searchKey)) {
+                return -1;
+                }
+                product.setQuantity(product.getQuantity() + 1);
+                customerProductDatabase.deleteRecord(searchKey);
         return product.getPrice();
     }
-
     public boolean applyPayment(String customerSSN, LocalDatepurchaseDate){
         ArrayList<CustomerProduct> allPurchases = customerProductDatabase.returnAllRecords();
         for(int i = 0; i < allPurchases.size(); i++){
