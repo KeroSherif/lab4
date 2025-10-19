@@ -7,8 +7,7 @@
  *
  * @author monic
  */
-public class Product {
-
+public class Product extends Record {
     private String productID;
     private String productName;
     private String manufacturerName;
@@ -25,22 +24,21 @@ public class Product {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    // ✅ getters مطلوبة
+    public String getProductID() { return productID; }
+    public String getProductName() { return productName; }
+    public String getManufacturerName() { return manufacturerName; }
+    public String getSupplierName() { return supplierName; }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public float getPrice() { return price; }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
+    @Override
     public String lineRepresentation() {
         return productID + "," + productName + "," + manufacturerName + "," + supplierName + "," + quantity + "," + price;
     }
 
+    @Override
     public String getSearchKey() {
         return productID;
     }
