@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 import java.util.ArrayList;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -12,7 +11,6 @@ import java.io.IOException;
  *
  * @author DANAH
  */
-import java.util.ArrayList;
 
 public class EmployeeUserDatabase extends DataBase {
     public EmployeeUserDatabase(String filename) {
@@ -48,6 +46,7 @@ public class EmployeeUserDatabase extends DataBase {
     public void insertRecord(EmployeeUser e) {
         records.add(e);
     }
+    
 }
     
     
