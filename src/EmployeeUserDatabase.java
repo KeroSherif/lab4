@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 import java.util.ArrayList;
-<<<<<<< Updated upstream
-=======
 import java.io.BufferedReader;
->>>>>>> Stashed changes
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -15,7 +12,6 @@ import java.io.IOException;
  *
  * @author DANAH
  */
-<<<<<<< Updated upstream
 
 public class EmployeeUserDatabase extends DataBase {
     public EmployeeUserDatabase(String filename) {
@@ -35,15 +31,11 @@ public class EmployeeUserDatabase extends DataBase {
         for (Record r : records) {
             if (r.getSearchKey().equals(key)) {
                 return (EmployeeUser) r;
-=======
-public class EmployeeUserDatabase {
-    private String fileName;
-    private ArrayList<EmployeeUser> records;
-    
-    public EmployeeUserDatabase(String filename){
-        this.fileName = fileName;
-        this.records = new ArrayList<>();
+            }
+        }
+        return null;
     }
+
     
     public void readFromFile() {
         records.clear();
@@ -80,16 +72,7 @@ public class EmployeeUserDatabase {
         return false;
     }
    
-    public EmployeeUser getRecord(String key){
-        for (EmployeeUser emp : records) {
-            if (emp.getSearchKey().equals(key)) {
-                return emp;
->>>>>>> Stashed changes
-            }
-        }
-        return null;
-    }
-<<<<<<< Updated upstream
+
 
     public ArrayList<EmployeeUser> returnAllRecords() {
         ArrayList<EmployeeUser> list = new ArrayList<>();
@@ -104,15 +87,11 @@ public class EmployeeUserDatabase {
     }
     
 }
-=======
     
-   public void insertRecord(EmployeeUser record){
-       records.add(record);
-   }
    
    
-} 
->>>>>>> Stashed changes
+ 
+
     
     
      
