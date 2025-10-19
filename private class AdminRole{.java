@@ -76,6 +76,9 @@ public class EmployeeRole{
                 customerProductDatabase.deleteRecord(searchKey);
         return product.getPrice();
     }
+
+
+    
     public boolean applyPayment(String customerSSN, LocalDatepurchaseDate){
         ArrayList<CustomerProduct> allPurchases = customerProductDatabase.returnAllRecords();
         for(int i = 0; i < allPurchases.size(); i++){
