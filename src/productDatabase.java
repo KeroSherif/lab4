@@ -8,77 +8,43 @@
  * @author monic
  */
 import java.util.ArrayList;
-import java.io.*;
 
-public class ProductDatabase {
-    private ArrayList<Product> records;
-    private String filename;
-
-    public ProductDatabase(String filename) {
-        this.filename = filename;
-        this.records = new ArrayList<>();
+public class productDatabase extends DataBase {
+    public productDatabase(String filename) {
+        super(filename);
     }
 
-    public void readFromFile() {
-        records.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Product product = createRecordFrom(line);
-                records.add(product);
-            }
-        } catch (IOException e) {
-        }
-    }
-
+    @Override
     public Product createRecordFrom(String line) {
-        String[] parts = line.split(",");
-        String productID = parts[0];
-        String productName = parts[1];
-        String manufacturerName = parts[2];
-        String supplierName = parts[3];
-        int quantity = Integer.parseInt(parts[4]);
-        float price = Float.parseFloat(parts[5]);
-        return new Product(productID, productName, manufacturerName, supplierName, quantity, price);
-    }
-
-    public ArrayList<Product> returnAllRecords() {
-        return records;
-    }
-
-    public boolean contains(String key) {
-        for (Product product : records) {
-            if (product.getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Product getRecord(String key) {
-        for (Product product : records) {
-            if (product.getSearchKey().equals(key)) {
-                return product;
+        String[] p = line.split(",");
+        if (p.length == 6) {
+            try {
+                return new Product(p[0], p[1], p[2], p[3], Integer.parseInt(p[4]), Float.parseFloat(p[5]));
+            } catch (NumberFormatException e) {
+                return null;
             }
         }
         return null;
     }
 
-    public void insertRecord(Product record) {
-        records.add(record);
-    }
-
-    public void deleteRecord(String key) {
-        records.removeIf(product -> product.getSearchKey().equals(key));
-    }
-
-    public void saveToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            for (Product product : records) {
-                writer.write(product.lineRepresentation());
-                writer.newLine();
+    public Product getRecord(String key) {
+        for (Record r : records) {
+            if (r.getSearchKey().equals(key)) {
+                return (Product) r;
             }
-        } catch (IOException e) {
         }
+        return null;
+    }
+
+    public ArrayList<Product> returnAllRecords() {
+        ArrayList<Product> list = new ArrayList<>();
+        for (Record r : records) {
+            list.add((Product) r);
+        }
+        return list;
+    }
+
+    public void insertRecord(Product p) {
+        records.add(p);
     }
 }
