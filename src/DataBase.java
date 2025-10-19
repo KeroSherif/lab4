@@ -23,43 +23,7 @@ public abstract class DataBase {
 
     public abstract Record createRecordFrom(String line);
 
-    public void readFromFile() {
-        records.clear();
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    Record rec = createRecordFrom(line);
-                    if (rec != null) records.add(rec);
-                }
-            }
-        } catch (IOException e) {
-           
-        }
+    
     }
 
-    public void saveToFile() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
-            for (Record r : records) {
-                pw.println(r.lineRepresentation());
-            }
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + filename);
-        }
-    }
-
-    public void insertRecord(Record record) {
-        records.add(record);
-    }
-
-    public void deleteRecord(String key) {
-        records.removeIf(r -> r.getSearchKey().equals(key));
-    }
-
-    public boolean contains(String key) {
-        for (Record r : records) {
-            if (r.getSearchKey().equals(key)) return true;
-        }
-        return false;
-    }
-}
+   
