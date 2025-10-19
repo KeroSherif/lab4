@@ -50,18 +50,6 @@ public class EmployeeUserDatabase extends DataBase {
         }
     }
     
-    public EmployeeUser createRecordFrom(String line){
-        String[] parts = line.split(",");
-        if (parts.length == 5) {
-            return new EmployeeUser(parts[0], parts[1], parts[2], parts[3], parts[4]);
-        } else {
-            return null;
-        }
-    }
-    
-    public ArrayList<EmployeeUser> returnAllRecords(){
-       return records; 
-    }
     
     public boolean contains(String key ){
      for (EmployeeUser emp : records) {
