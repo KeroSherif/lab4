@@ -1,5 +1,3 @@
-w
-    
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -22,10 +20,7 @@ public class EmployeeRole {
     if (quantity < 0) {
         System.err.println(" Quantity cannot be negative.");
         return;
-    }
-
-
-    
+    }    
     if (productDatabase.contains(productID)) {
         System.err.println(" Product with ID " + productID + " already exists.");
         return;
