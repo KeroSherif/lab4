@@ -54,8 +54,18 @@ public abstract class DataBase {
         records.add(record);
     }
     
+    public void deleteRecord(String key) {
+        records.removeIf(r -> r.getSearchKey().equals(key));
+    }
     
-    
+    public boolean contains(String key) {
+        for (Record r : records) {
+            if (r.getSearchKey().equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
     
             }
 
