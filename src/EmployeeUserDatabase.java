@@ -51,17 +51,6 @@ public class EmployeeUserDatabase extends DataBase {
     }
     
     
-    public boolean contains(String key ){
-     for (EmployeeUser emp : records) {
-            if (emp.getSearchKey().equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
-   
-
-
     public ArrayList<EmployeeUser> returnAllRecords() {
         ArrayList<EmployeeUser> list = new ArrayList<>();
         for (Record r : records) {
