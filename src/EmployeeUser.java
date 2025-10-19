@@ -13,11 +13,7 @@ public class EmployeeUser extends Record {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmployeeId() { return employeeId; }
-    public String getName() { return name; }
-    public String getEmail() { return email; }
-    public String getAddress() { return address; }
-    public String getPhoneNumber() { return phoneNumber; }
+    
 
     @Override
     public String lineRepresentation() {
