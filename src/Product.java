@@ -24,7 +24,6 @@ public class Product extends Record {
         this.price = price;
     }
 
-    // ✅ getters مطلوبة
     public String getProductID() { return productID; }
     public String getProductName() { return productName; }
     public String getManufacturerName() { return manufacturerName; }
